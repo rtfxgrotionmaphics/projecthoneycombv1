@@ -172,7 +172,7 @@ export default function Home() {
 
       <header className="site-header">
         <button className="brand" type="button" aria-label="Honeycomb home" onClick={() => setActivePanel(null)}>
-          <img src="/hc-living-cluster-watermark.png" alt="" />
+          <img src="/hc-living-path-organic.svg" alt="" />
           <span>HONEYCOMB</span>
         </button>
 
@@ -229,7 +229,7 @@ export default function Home() {
               <h1>{activePanel.title}</h1>
               <div className="panel-copy">{activePanel.body}</div>
             </div>
-            <footer className="story-footer"><img src="/hc-living-cluster-watermark.png" alt="" /><div><strong>YOUR EXPERIENCE.</strong><span>OUR COLLECTIVE HISTORY.</span></div><small>HONEYCOMB</small></footer>
+            <footer className="story-footer"><img src="/hc-living-path-organic-white.svg" alt="" /><div><strong>YOUR EXPERIENCE.</strong><span>OUR COLLECTIVE HISTORY.</span></div><small>HONEYCOMB</small></footer>
           </>
         )}
       </aside>
