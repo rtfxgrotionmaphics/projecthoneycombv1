@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   description:
     "An organic, living archive of personal accounts of UAP, UFO, and unexplained experiences.",
   icons: {
-    icon: "/hc-living-path-organic.svg",
-    shortcut: "/hc-living-path-organic.svg",
+    icon: "/hc-connected-field-watermark.svg",
+    shortcut: "/hc-connected-field-watermark.svg",
   },
 };
 

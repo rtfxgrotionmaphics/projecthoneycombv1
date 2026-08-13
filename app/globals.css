@@ -115,8 +115,8 @@ button { color: inherit; }
 }
 
 .brand img {
-  width: 50px;
-  height: 50px;
+  width: 76px;
+  height: 42px;
   object-fit: contain;
   filter: drop-shadow(0 0 12px rgba(242, 191, 73, .2));
 }
@@ -160,7 +160,7 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   scrollbar-width: thin;
   scrollbar-color: rgba(242,191,73,.35) transparent;
   overscroll-behavior-x: contain;
-  touch-action: pan-x pan-y;
+  touch-action: pan-x;
 }
 .archive-scroll::-webkit-scrollbar { height: 5px; }
 .archive-scroll::-webkit-scrollbar-track { background: transparent; }
@@ -170,10 +170,10 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 
 .cells-stage {
   position: relative;
-  height: calc((100svh - 112px) * 1.6);
-  width: calc((100svh - 112px) * 2.472);
+  height: calc((100svh - 112px) * 1.32);
+  width: calc((100svh - 112px) * 3.9381);
   margin: 0 auto;
-  aspect-ratio: 4268 / 2763;
+  aspect-ratio: 12220 / 4096;
   transition: transform .72s cubic-bezier(.2,.78,.2,1), filter .55s ease;
   animation: field-arrival 1.25s cubic-bezier(.2,.78,.2,1) both;
 }
@@ -210,8 +210,8 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 }
 .cell-hotspot {
   position: absolute;
-  width: 7.40394%;
-  aspect-ratio: 316 / 274;
+  width: 2.242%;
+  aspect-ratio: 274 / 234;
   padding: 0;
   border: 0;
   background: transparent;
@@ -272,8 +272,8 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 
 .portrait-cell {
   position: absolute;
-  width: 7.40394%;
-  aspect-ratio: 316 / 274;
+  width: 2.242%;
+  aspect-ratio: 274 / 234;
   padding: 0;
   border: 0;
   background: transparent;
@@ -302,10 +302,10 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 .portrait-frame {
   position: absolute;
   z-index: 2;
-  top: 11%;
-  left: 12%;
-  width: 76%;
-  height: 78%;
+  top: 13%;
+  right: 14%;
+  bottom: 13%;
+  left: 14%;
   display: block;
   overflow: hidden;
   clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
@@ -536,7 +536,7 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   padding: 23px clamp(42px, 5.8vw, 92px) 26px;
   background: rgba(78, 42, 14, .22);
 }
-.story-footer img { width: 33px; height: 33px; object-fit: contain; opacity: .88; }
+.story-footer img { width: 58px; height: 30px; object-fit: contain; opacity: .88; }
 .story-footer div { display: flex; flex-direction: column; gap: 2px; font-family: "Montserrat"; font-size: 8px; letter-spacing: .12em; }
 .story-footer strong { color: var(--cream); }
 .story-footer span { color: var(--muted); }
@@ -554,16 +554,16 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 @media (max-width: 880px) {
   .site-header { top: 12px; left: 12px; right: 12px; height: 62px; padding: 0 14px; border-radius: 9px; }
   .brand { gap: 9px; font-size: clamp(9px, 1.5vw, 12px); letter-spacing: .11em; }
-  .brand img { width: 34px; height: 34px; }
+  .brand img { width: 54px; height: 30px; }
   nav { gap: clamp(9px, 2vw, 18px); }
   nav a, nav button { font-size: clamp(7px, 1.15vw, 9px); letter-spacing: .09em; white-space: nowrap; }
   nav .share-button { padding: 11px 12px; }
 
   .archive-field { padding: 86px 0 0; }
   .archive-scroll { inset: 86px 0 0; }
-  .cells-stage { height: calc((100svh - 86px) * 1.6); width: calc((100svh - 86px) * 2.472); margin: 0 auto; max-width: none; }
+  .cells-stage { height: calc((100svh - 86px) * 1.32); width: calc((100svh - 86px) * 3.9381); margin: 0 auto; max-width: none; }
   .archive--engaged .cells-stage { filter: brightness(.73); }
-  .cell-hotspot { width: 7.40394%; }
+  .cell-hotspot { width: 2.242%; }
   .interaction-cue { bottom: 13px; font-size: 8px; }
 
   .story-panel { top: 0; width: min(92vw, 520px); }
