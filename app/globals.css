@@ -102,12 +102,16 @@ button { color: inherit; }
   display: flex;
   align-items: center;
   gap: 15px;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--gold);
   text-decoration: none;
   font-family: "Montserrat", sans-serif;
   font-size: clamp(15px, 1.2vw, 20px);
   font-weight: 600;
   letter-spacing: .16em;
+  cursor: pointer;
 }
 
 .brand img {
@@ -259,6 +263,96 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 }
 .cell-hotspot:focus-visible { outline: 2px solid var(--cream); outline-offset: 5px; }
 
+.portrait-cluster {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  pointer-events: none;
+}
+
+.portrait-cell {
+  position: absolute;
+  width: 2.242%;
+  aspect-ratio: 274 / 234;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.portrait-frame {
+  position: absolute;
+  inset: -2.8%;
+  display: block;
+  overflow: hidden;
+  clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0 50%);
+  background: #211307;
+  filter: drop-shadow(0 0 8px rgba(255, 185, 52, .48));
+  transform-origin: center;
+  transition: transform .28s cubic-bezier(.2,.78,.2,1), filter .28s ease;
+}
+
+.portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: inherit;
+  box-shadow: inset 0 0 0 3px rgba(249, 192, 70, .98), inset 0 0 0 7px rgba(65, 30, 5, .92), inset 0 0 17px 6px rgba(255, 174, 43, .5);
+  pointer-events: none;
+}
+
+.portrait-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  filter: saturate(.96) contrast(1.04) brightness(.96);
+}
+
+.portrait-cell:nth-child(1) .portrait-frame img,
+.portrait-cell:nth-child(3) .portrait-frame img,
+.portrait-cell:nth-child(4) .portrait-frame img,
+.portrait-cell:nth-child(5) .portrait-frame img,
+.portrait-cell:nth-child(6) .portrait-frame img,
+.portrait-cell:nth-child(7) .portrait-frame img,
+.portrait-cell:nth-child(8) .portrait-frame img { transform: scale(1.03); }
+
+.portrait-cell:hover,
+.portrait-cell:focus-visible { z-index: 20; }
+.portrait-cell:hover .portrait-frame,
+.portrait-cell:focus-visible .portrait-frame {
+  transform: scale(1.38);
+  filter: drop-shadow(0 0 22px rgba(255, 197, 66, .88)) drop-shadow(0 14px 26px rgba(24, 10, 2, .62));
+}
+.portrait-cell:focus-visible { outline: 2px solid var(--cream); outline-offset: 5px; }
+
+.portrait-name {
+  position: absolute;
+  z-index: 3;
+  top: 109%;
+  left: 50%;
+  width: max-content;
+  max-width: 190px;
+  padding: 8px 10px;
+  border: 1px solid rgba(242,191,73,.55);
+  border-radius: 2px;
+  background: rgba(10,6,2,.94);
+  color: var(--cream);
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  letter-spacing: .1em;
+  opacity: 0;
+  transform: translate(-50%, -8px);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+}
+.portrait-cell:hover .portrait-name,
+.portrait-cell:focus-visible .portrait-name { opacity: 1; transform: translate(-50%, 0); }
+
 .interaction-cue {
   position: fixed;
   z-index: 8;
@@ -321,7 +415,7 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 0;
   overflow: visible;
   position: relative;
@@ -361,6 +455,37 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   text-wrap: wrap;
   text-shadow: 0 6px 24px rgba(8, 4, 2, .78);
 }
+
+.panel-copy {
+  margin-top: 28px;
+  max-width: 560px;
+  max-height: calc(100svh - 390px);
+  padding-right: 12px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(242,191,73,.32) transparent;
+  color: #ddc9ab;
+  font-size: 15px;
+  line-height: 1.62;
+}
+.panel-copy::-webkit-scrollbar { width: 4px; }
+.panel-copy::-webkit-scrollbar-thumb { border-radius: 4px; background: rgba(242,191,73,.3); }
+.panel-copy > p { margin: 0 0 18px; }
+.panel-copy .declaration { color: var(--cream); font-size: 19px; font-weight: 600; }
+.panel-copy h2 { margin: 26px 0 9px; color: var(--cream); font-family: "Montserrat", sans-serif; font-size: 18px; letter-spacing: .03em; }
+.panel-copy .story-action { margin-top: 28px; text-decoration: none; }
+
+.bios { display: grid; gap: 24px; padding-bottom: 20px; }
+.bios article { padding-top: 20px; border-top: 1px solid rgba(216,145,38,.25); }
+.bios article:first-child { padding-top: 0; border-top: 0; }
+.bios h2 { margin-top: 0; }
+.bios p { margin: 0; }
+
+.contact-list { display: grid; gap: 1px; margin-bottom: 25px; background: rgba(216,145,38,.26); }
+.contact-list a { display: flex; flex-direction: column; gap: 4px; padding: 14px; background: #0d0804; color: var(--cream); text-decoration: none; }
+.contact-list strong { font-family: "Montserrat", sans-serif; font-size: 12px; letter-spacing: .08em; }
+.contact-list span { color: var(--muted); font-size: 12px; }
+.contact-list a:hover span, .contact-list a:focus-visible span { color: var(--gold); }
 
 .story-meta {
   display: grid;
@@ -424,6 +549,7 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   .story-content h1 { width: calc(100% + 54px); font-size: clamp(38px, 10.5vw, 53px); }
   .story-meta { margin-top: 26px; }
   .story-summary { font-size: 15px; line-height: 1.58; }
+  .panel-copy { font-size: 14px; line-height: 1.55; }
   .story-action { width: 100%; justify-content: space-between; }
   .story-footer { padding: 18px 25px 21px; }
   .story-footer small { display: none; }
