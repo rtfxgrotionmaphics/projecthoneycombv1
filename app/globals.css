@@ -152,7 +152,7 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 .archive-scroll {
   position: absolute;
   inset: 112px 0 0;
-  overflow: auto hidden;
+  overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(242,191,73,.35) transparent;
   overscroll-behavior-x: contain;
@@ -166,8 +166,8 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 
 .cells-stage {
   position: relative;
-  height: calc(100svh - 112px);
-  width: calc((100svh - 112px) * 2.9834);
+  height: calc((100svh - 112px) * 1.32);
+  width: calc((100svh - 112px) * 3.9381);
   margin: 0 auto;
   aspect-ratio: 12220 / 4096;
   transition: transform .72s cubic-bezier(.2,.78,.2,1), filter .55s ease;
@@ -408,7 +408,7 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 
   .archive-field { padding: 86px 0 0; }
   .archive-scroll { inset: 86px 0 0; }
-  .cells-stage { height: calc(100svh - 86px); width: calc((100svh - 86px) * 2.9834); margin: 0 auto; max-width: none; }
+  .cells-stage { height: calc((100svh - 86px) * 1.32); width: calc((100svh - 86px) * 3.9381); margin: 0 auto; max-width: none; }
   .archive--engaged .cells-stage { filter: brightness(.73); }
   .cell-hotspot { width: 2.242%; }
   .interaction-cue { bottom: 13px; font-size: 8px; }
