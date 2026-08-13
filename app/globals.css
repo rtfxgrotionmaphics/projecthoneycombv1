@@ -199,7 +199,11 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   user-select: none;
 }
 
-.cell-hotspots { position: absolute; inset: 0; }
+.cell-hotspots {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+}
 .cell-hotspot {
   position: absolute;
   width: 2.242%;
