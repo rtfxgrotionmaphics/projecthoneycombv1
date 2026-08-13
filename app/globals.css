@@ -285,12 +285,12 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 
 .portrait-frame {
   position: absolute;
-  inset: -2.8%;
+  inset: 9% 8%;
   display: block;
   overflow: hidden;
-  clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0 50%);
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
   background: #211307;
-  filter: drop-shadow(0 0 8px rgba(255, 185, 52, .48));
+  filter: none;
   transform-origin: center;
   transition: transform .28s cubic-bezier(.2,.78,.2,1), filter .28s ease;
 }
@@ -300,7 +300,13 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   position: absolute;
   inset: 0;
   clip-path: inherit;
-  box-shadow: inset 0 0 0 3px rgba(249, 192, 70, .98), inset 0 0 0 7px rgba(65, 30, 5, .92), inset 0 0 17px 6px rgba(255, 174, 43, .5);
+  background:
+    linear-gradient(135deg, rgba(0,0,0,.08), transparent 38%),
+    linear-gradient(45deg, transparent 54%, rgba(0,0,0,.38));
+  box-shadow:
+    inset -5px 5px 9px rgba(0,0,0,.52),
+    inset 2px -2px 5px rgba(255,184,64,.18),
+    inset 0 0 0 1px rgba(12,7,3,.78);
   pointer-events: none;
 }
 
@@ -309,24 +315,16 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 25%;
+  object-position: center;
   filter: saturate(.96) contrast(1.04) brightness(.96);
 }
-
-.portrait-cell:nth-child(1) .portrait-frame img,
-.portrait-cell:nth-child(3) .portrait-frame img,
-.portrait-cell:nth-child(4) .portrait-frame img,
-.portrait-cell:nth-child(5) .portrait-frame img,
-.portrait-cell:nth-child(6) .portrait-frame img,
-.portrait-cell:nth-child(7) .portrait-frame img,
-.portrait-cell:nth-child(8) .portrait-frame img { transform: scale(1.03); }
 
 .portrait-cell:hover,
 .portrait-cell:focus-visible { z-index: 20; }
 .portrait-cell:hover .portrait-frame,
 .portrait-cell:focus-visible .portrait-frame {
   transform: scale(1.38);
-  filter: drop-shadow(0 0 22px rgba(255, 197, 66, .88)) drop-shadow(0 14px 26px rgba(24, 10, 2, .62));
+  filter: drop-shadow(0 0 18px rgba(255, 197, 66, .76)) drop-shadow(0 12px 24px rgba(24, 10, 2, .6));
 }
 .portrait-cell:focus-visible { outline: 2px solid var(--cream); outline-offset: 5px; }
 

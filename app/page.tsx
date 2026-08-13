@@ -103,21 +103,21 @@ const HOTSPOTS = Array.from({ length: 4 }, (_, repeat) =>
 ).flat();
 
 const PORTRAIT_SOURCES = [
-  ["/people/mark.png", "Mark"],
-  ["/people/walter-p.png", "Walter P"],
-  ["/people/karen-fine.png", "Karen Fine"],
-  ["/people/pricilla.png", "Pricilla"],
-  ["/people/cydney.png", "Cydney"],
-  ["/people/finn.png", "Finn"],
-  ["/people/george-kendle.png", "George Kendle"],
-  ["/people/ramiro.png", "Ramiro"],
-  ["/people/unknown-01.png", "Honeycomb community member"],
-  ["/people/paul-werenko.png", "Paul Werenko"],
-  ["/people/unknown-02.png", "Honeycomb community member"],
-  ["/people/unknown-03.png", "Honeycomb community member"],
-  ["/people/unknown-04.png", "Honeycomb community member"],
-  ["/people/unknown-05.png", "Honeycomb community member"],
-  ["/people/unknown-06.png", "Honeycomb community member"],
+  ["/people/mark.png", "Mark", "50% 28%", 1.06],
+  ["/people/walter-p.png", "Walter P", "50% 23%", 1.08],
+  ["/people/karen-fine.png", "Karen Fine", "50% 25%", 1.05],
+  ["/people/pricilla.png", "Pricilla", "47% 26%", 1.07],
+  ["/people/cydney.png", "Cydney", "52% 25%", 1.07],
+  ["/people/finn.png", "Finn", "50% 27%", 1.08],
+  ["/people/george-kendle.png", "George Kendle", "50% 24%", 1.06],
+  ["/people/ramiro.png", "Ramiro", "50% 26%", 1.06],
+  ["/people/unknown-01.png", "Honeycomb community member", "50% 50%", 1.37],
+  ["/people/paul-werenko.png", "Paul Werenko", "50% 50%", 1.37],
+  ["/people/unknown-02.png", "Honeycomb community member", "50% 50%", 1.37],
+  ["/people/unknown-03.png", "Honeycomb community member", "50% 50%", 1.37],
+  ["/people/unknown-04.png", "Honeycomb community member", "50% 50%", 1.37],
+  ["/people/unknown-05.png", "Honeycomb community member", "50% 50%", 1.37],
+  ["/people/unknown-06.png", "Honeycomb community member", "50% 50%", 1.37],
 ] as const;
 
 // Fifteen occupied centers from one uninterrupted section of the approved
@@ -125,12 +125,14 @@ const PORTRAIT_SOURCES = [
 // with another portrait and never floats outside the field.
 const PORTRAIT_CENTERS = [[1835,560],[2039,672],[2247,556],[2447,672],[2659,556],[1835,788],[2247,788],[2655,788],[1831,1020],[2039,1136],[2243,1020],[2451,1136],[2655,1020],[2039,1372],[2455,1372]] as const;
 
-const PORTRAITS = PORTRAIT_SOURCES.map(([src, name], index) => {
+const PORTRAITS = PORTRAIT_SOURCES.map(([src, name, position, scale], index) => {
   const [sourceX, sourceY] = PORTRAIT_CENTERS[index];
   const repeat = 1;
   return {
     src,
     name,
+    position,
+    scale,
     x: ((120 + repeat * 2884 + sourceX) / 12220) * 100,
     y: ((repeat * 5 + sourceY) / 4096) * 100,
   };
@@ -202,7 +204,13 @@ export default function Home() {
             <div className="portrait-cluster" aria-label="Honeycomb community portraits">
               {PORTRAITS.map((portrait) => (
                 <button key={portrait.src} className="portrait-cell" type="button" style={{ left: `${portrait.x}%`, top: `${portrait.y}%` }} aria-label={`${portrait.name}; story video coming soon`}>
-                  <span className="portrait-frame"><img src={portrait.src} alt={portrait.name === "Honeycomb community member" ? "" : portrait.name} /></span>
+                  <span className="portrait-frame">
+                    <img
+                      src={portrait.src}
+                      alt={portrait.name === "Honeycomb community member" ? "" : portrait.name}
+                      style={{ objectPosition: portrait.position, transform: `scale(${portrait.scale})` }}
+                    />
+                  </span>
                   {portrait.name !== "Honeycomb community member" && <span className="portrait-name">{portrait.name}</span>}
                 </button>
               ))}
