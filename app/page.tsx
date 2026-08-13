@@ -167,6 +167,12 @@ export default function Home() {
         >
         <div className="cells-stage">
           <img
+            className="vines-art"
+            src="/hc-connected-vines-alpha.png"
+            alt=""
+            aria-hidden="true"
+          />
+          <img
             className="cells-art"
             src="/hc-cells-final-web.webp"
             alt="An organic field of illuminated honeycomb archive cells"
