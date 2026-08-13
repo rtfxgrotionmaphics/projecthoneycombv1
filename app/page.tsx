@@ -70,16 +70,13 @@ const HOTSPOTS = Array.from({ length: 4 }, (_, repeat) =>
 
 export default function Home() {
   const [activeStory, setActiveStory] = useState<Story | null>(null);
-  const [activeHotspot, setActiveHotspot] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [pointerMode, setPointerMode] = useState(false);
   const archiveScrollRef = useRef<HTMLDivElement>(null);
   const closeTimerRef = useRef<number | null>(null);
 
-  const openStory = (story: Story, hotspotIndex: number | null = null) => {
+  const openStory = (story: Story) => {
     if (closeTimerRef.current !== null) window.clearTimeout(closeTimerRef.current);
     setActiveStory(story);
-    setActiveHotspot(hotspotIndex);
     setMenuOpen(false);
   };
 
@@ -89,11 +86,9 @@ export default function Home() {
   };
 
   const scheduleClose = () => {
-    if (!pointerMode) return;
     cancelScheduledClose();
     closeTimerRef.current = window.setTimeout(() => {
       setActiveStory(null);
-      setActiveHotspot(null);
     }, 420);
   };
 
@@ -101,7 +96,6 @@ export default function Home() {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setActiveStory(null);
-        setActiveHotspot(null);
         setMenuOpen(false);
       }
     };
@@ -114,14 +108,6 @@ export default function Home() {
     if (!field) return;
     field.scrollLeft = Math.max(0, (field.scrollWidth - field.clientWidth) / 2);
   }, []);
-
-  const scrollArchive = (event: React.WheelEvent<HTMLDivElement>) => {
-    const field = archiveScrollRef.current;
-    if (!field || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
-    if (field.scrollWidth <= field.clientWidth) return;
-    event.preventDefault();
-    field.scrollLeft += event.deltaY;
-  };
 
   return (
     <main className={`archive ${activeStory ? "archive--engaged" : ""}`}>
@@ -147,10 +133,10 @@ export default function Home() {
 
         <nav id="primary-navigation" className={menuOpen ? "nav-open" : ""} aria-label="Primary navigation">
           <a href="#archive-field">HOME</a>
-          <button type="button" onClick={() => openStory(STORIES[0])}>EXPLORE</button>
-          <button type="button" onClick={() => openStory(STORIES[1])}>STORIES</button>
-          <button type="button" onClick={() => openStory(STORIES[2])}>ABOUT</button>
-          <button className="share-button" type="button" onClick={() => openStory(STORIES[3])}>CONTRIBUTE</button>
+          <button type="button" onMouseEnter={() => openStory(STORIES[0])} onMouseLeave={scheduleClose} onFocus={() => openStory(STORIES[0])} onClick={() => openStory(STORIES[0])}>EXPLORE</button>
+          <button type="button" onMouseEnter={() => openStory(STORIES[1])} onMouseLeave={scheduleClose} onFocus={() => openStory(STORIES[1])} onClick={() => openStory(STORIES[1])}>STORIES</button>
+          <button type="button" onMouseEnter={() => openStory(STORIES[2])} onMouseLeave={scheduleClose} onFocus={() => openStory(STORIES[2])} onClick={() => openStory(STORIES[2])}>ABOUT</button>
+          <button className="share-button" type="button" onMouseEnter={() => openStory(STORIES[3])} onMouseLeave={scheduleClose} onFocus={() => openStory(STORIES[3])} onClick={() => openStory(STORIES[3])}>CONTRIBUTE</button>
         </nav>
       </header>
 
@@ -159,11 +145,6 @@ export default function Home() {
           ref={archiveScrollRef}
           className="archive-scroll"
           aria-label="Scrollable archive field"
-          onWheel={scrollArchive}
-          onPointerEnter={(event) => setPointerMode(event.pointerType === "mouse")}
-          onPointerLeave={(event) => {
-            if (event.pointerType === "mouse") scheduleClose();
-          }}
         >
         <div className="cells-stage">
           <img
@@ -183,14 +164,10 @@ export default function Home() {
               return (
                 <button
                   key={`${story.id}-${index}`}
-                  className={`cell-hotspot ${activeHotspot === index ? "cell-hotspot--active" : ""}`}
+                  className="cell-hotspot"
                   type="button"
                   style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
-                  aria-label={`Open ${story.title}`}
-                  onMouseEnter={() => openStory(story, index)}
-                  onMouseLeave={scheduleClose}
-                  onFocus={() => openStory(story, index)}
-                  onClick={() => openStory(story, index)}
+                  aria-label={`${story.title} video - coming soon`}
                 >
                   <img src="/hc-single-cell-hover.png" alt="" aria-hidden="true" />
                   <span aria-hidden="true" />
@@ -216,7 +193,6 @@ export default function Home() {
           aria-label="Close archive record"
           onClick={() => {
             setActiveStory(null);
-            setActiveHotspot(null);
           }}
         >
           <span aria-hidden="true">×</span>
