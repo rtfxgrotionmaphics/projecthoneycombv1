@@ -278,13 +278,30 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   border: 0;
   background: transparent;
   transform: translate(-50%, -50%);
+  transform-origin: center;
   pointer-events: auto;
   cursor: pointer;
   overflow: visible;
+  transition: transform .28s cubic-bezier(.2,.78,.2,1), filter .28s ease;
+}
+
+.portrait-cell-shell {
+  position: absolute;
+  z-index: 1;
+  inset: -6%;
+  display: block;
+  width: 112%;
+  height: 112%;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 0 7px rgba(255, 185, 52, .38));
+  transition: opacity .12s ease;
 }
 
 .portrait-frame {
   position: absolute;
+  z-index: 2;
   inset: 9% 8%;
   display: block;
   overflow: hidden;
@@ -320,13 +337,18 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 }
 
 .portrait-cell:hover,
-.portrait-cell:focus-visible { z-index: 20; }
-.portrait-cell:hover .portrait-frame,
-.portrait-cell:focus-visible .portrait-frame {
-  transform: scale(1.38);
+.portrait-cell:focus-visible {
+  z-index: 20;
+  transform: translate(-50%, -50%) scale(1.38);
   filter: drop-shadow(0 0 18px rgba(255, 197, 66, .76)) drop-shadow(0 12px 24px rgba(24, 10, 2, .6));
 }
-.portrait-cell:focus-visible { outline: 2px solid var(--cream); outline-offset: 5px; }
+.portrait-cell:hover .portrait-cell-shell,
+.portrait-cell:focus-visible .portrait-cell-shell { opacity: 1; }
+.portrait-cell:hover .portrait-frame,
+.portrait-cell:focus-visible .portrait-frame {
+  filter: none;
+}
+.portrait-cell:focus-visible { outline: 0; }
 
 .portrait-name {
   position: absolute;
@@ -343,13 +365,14 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   font-family: "Montserrat", sans-serif;
   font-size: 9px;
   letter-spacing: .1em;
+  display: none;
   opacity: 0;
   transform: translate(-50%, -8px);
   transition: opacity .2s ease, transform .2s ease;
   pointer-events: none;
 }
 .portrait-cell:hover .portrait-name,
-.portrait-cell:focus-visible .portrait-name { opacity: 1; transform: translate(-50%, 0); }
+.portrait-cell:focus-visible .portrait-name { opacity: 0; transform: translate(-50%, -8px); }
 
 .interaction-cue {
   position: fixed;

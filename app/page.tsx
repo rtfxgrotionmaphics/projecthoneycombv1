@@ -204,6 +204,7 @@ export default function Home() {
             <div className="portrait-cluster" aria-label="Honeycomb community portraits">
               {PORTRAITS.map((portrait) => (
                 <button key={portrait.src} className="portrait-cell" type="button" style={{ left: `${portrait.x}%`, top: `${portrait.y}%` }} aria-label={`${portrait.name}; story video coming soon`}>
+                  <img className="portrait-cell-shell" src="/hc-single-cell-hover.png" alt="" aria-hidden="true" />
                   <span className="portrait-frame">
                     <img
                       src={portrait.src}
