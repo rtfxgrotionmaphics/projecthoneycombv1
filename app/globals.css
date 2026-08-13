@@ -499,10 +499,39 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 .panel-copy h2 { margin: 26px 0 9px; color: var(--cream); font-family: "Montserrat", sans-serif; font-size: 18px; letter-spacing: .03em; }
 .panel-copy .story-action { margin-top: 28px; text-decoration: none; }
 
-.bios { display: grid; gap: 24px; padding-bottom: 20px; }
-.bios article { padding-top: 20px; border-top: 1px solid rgba(216,145,38,.25); }
-.bios article:first-child { padding-top: 0; border-top: 0; }
-.bios h2 { margin-top: 0; }
+.story-panel--about { width: min(78vw, 1180px); }
+.story-panel--about .story-content h1 { max-width: 860px; }
+.story-panel--about .panel-copy { max-width: none; max-height: calc(100svh - 330px); padding-right: 22px; }
+.bios { display: grid; gap: 0; padding-bottom: 28px; }
+.bio {
+  display: grid;
+  grid-template-columns: 224px minmax(0, 1fr);
+  gap: 34px;
+  align-items: start;
+  padding: 34px 0;
+  border-top: 1px solid rgba(216,145,38,.25);
+}
+.bio:first-child { padding-top: 0; border-top: 0; }
+.bio--reverse { grid-template-columns: minmax(0, 1fr) 224px; }
+.bio--reverse .bio-portrait { order: 2; }
+.bio--reverse .bio-copy { order: 1; }
+.bio-portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  clip-path: polygon(25% 0, 75% 0, 100% 18%, 100% 82%, 75% 100%, 25% 100%, 0 82%, 0 18%);
+  background: #211307;
+  filter: drop-shadow(0 11px 20px rgba(0,0,0,.34));
+}
+.bio-portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset -8px 8px 16px rgba(0,0,0,.55), inset 0 0 0 2px rgba(227,164,68,.58);
+  pointer-events: none;
+}
+.bio-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.bios h2 { margin: 0 0 14px; font-size: 26px; letter-spacing: -.02em; }
 .bios p { margin: 0; }
 
 .contact-list { display: grid; gap: 1px; margin-bottom: 25px; background: rgba(216,145,38,.26); }
@@ -567,6 +596,7 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   .interaction-cue { bottom: 13px; font-size: 8px; }
 
   .story-panel { top: 0; width: min(92vw, 520px); }
+  .story-panel--about { width: min(96vw, 760px); }
   .close-panel { top: 98px; }
   .story-content { justify-content: flex-start; padding: 120px 25px 28px 44px; }
   .story-content::before { left: 25px; top: 120px; bottom: 28px; }
@@ -574,6 +604,9 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   .story-meta { margin-top: 26px; }
   .story-summary { font-size: 15px; line-height: 1.58; }
   .panel-copy { font-size: 14px; line-height: 1.55; }
+  .story-panel--about .panel-copy { max-height: calc(100svh - 300px); }
+  .bio, .bio--reverse { grid-template-columns: 145px minmax(0, 1fr); gap: 18px; }
+  .bio--reverse .bio-portrait, .bio--reverse .bio-copy { order: initial; }
   .story-action { width: 100%; justify-content: space-between; }
   .story-footer { padding: 18px 25px 21px; }
   .story-footer small { display: none; }
@@ -597,6 +630,10 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   nav .share-button { padding: 13px 5px; border: 0; }
   .story-content { overflow-y: auto; overflow-x: hidden; }
   .story-content h1 { width: 100%; }
+  .story-panel--about .story-content { padding-right: 20px; }
+  .story-panel--about .panel-copy { padding-right: 8px; }
+  .bio, .bio--reverse { grid-template-columns: 1fr; gap: 14px; padding: 22px 0; }
+  .bio-portrait { width: min(72vw, 250px); aspect-ratio: 1 / 1; }
 }
 
 @media (max-height: 710px) and (min-width: 881px) {
