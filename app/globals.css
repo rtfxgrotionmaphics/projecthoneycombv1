@@ -160,7 +160,7 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   scrollbar-width: thin;
   scrollbar-color: rgba(242,191,73,.35) transparent;
   overscroll-behavior-x: contain;
-  touch-action: pan-x;
+  touch-action: pan-x pan-y;
 }
 .archive-scroll::-webkit-scrollbar { height: 5px; }
 .archive-scroll::-webkit-scrollbar-track { background: transparent; }
@@ -170,10 +170,10 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 
 .cells-stage {
   position: relative;
-  height: calc((100svh - 112px) * 1.32);
-  width: calc((100svh - 112px) * 3.9381);
+  height: calc((100svh - 112px) * 1.6);
+  width: calc((100svh - 112px) * 2.472);
   margin: 0 auto;
-  aspect-ratio: 12220 / 4096;
+  aspect-ratio: 4268 / 2763;
   transition: transform .72s cubic-bezier(.2,.78,.2,1), filter .55s ease;
   animation: field-arrival 1.25s cubic-bezier(.2,.78,.2,1) both;
 }
@@ -210,8 +210,8 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 }
 .cell-hotspot {
   position: absolute;
-  width: 2.242%;
-  aspect-ratio: 274 / 234;
+  width: 7.40394%;
+  aspect-ratio: 316 / 274;
   padding: 0;
   border: 0;
   background: transparent;
@@ -272,8 +272,8 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 
 .portrait-cell {
   position: absolute;
-  width: 2.242%;
-  aspect-ratio: 274 / 234;
+  width: 7.40394%;
+  aspect-ratio: 316 / 274;
   padding: 0;
   border: 0;
   background: transparent;
@@ -288,10 +288,10 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 .portrait-cell-shell {
   position: absolute;
   z-index: 1;
-  inset: -6%;
+  inset: 0;
   display: block;
-  width: 112%;
-  height: 112%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   opacity: 0;
   pointer-events: none;
@@ -302,7 +302,10 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 .portrait-frame {
   position: absolute;
   z-index: 2;
-  inset: 9% 8%;
+  top: 11%;
+  left: 12%;
+  width: 76%;
+  height: 78%;
   display: block;
   overflow: hidden;
   clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
@@ -558,9 +561,9 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 
   .archive-field { padding: 86px 0 0; }
   .archive-scroll { inset: 86px 0 0; }
-  .cells-stage { height: calc((100svh - 86px) * 1.32); width: calc((100svh - 86px) * 3.9381); margin: 0 auto; max-width: none; }
+  .cells-stage { height: calc((100svh - 86px) * 1.6); width: calc((100svh - 86px) * 2.472); margin: 0 auto; max-width: none; }
   .archive--engaged .cells-stage { filter: brightness(.73); }
-  .cell-hotspot { width: 2.242%; }
+  .cell-hotspot { width: 7.40394%; }
   .interaction-cue { bottom: 13px; font-size: 8px; }
 
   .story-panel { top: 0; width: min(92vw, 520px); }
