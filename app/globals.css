@@ -518,19 +518,27 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
 .bio-portrait {
   position: relative;
   aspect-ratio: 4 / 5;
-  overflow: hidden;
-  clip-path: polygon(25% 0, 75% 0, 100% 18%, 100% 82%, 75% 100%, 25% 100%, 0 82%, 0 18%);
-  background: #211307;
+  overflow: visible;
+  background: url("/hc-single-cell-hover.png") center / contain no-repeat;
   filter: drop-shadow(0 11px 20px rgba(0,0,0,.34));
 }
 .bio-portrait::after {
   content: "";
   position: absolute;
-  inset: 0;
-  box-shadow: inset -8px 8px 16px rgba(0,0,0,.55), inset 0 0 0 2px rgba(227,164,68,.58);
+  inset: 23% 10.5%;
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  box-shadow: inset -8px 8px 16px rgba(0,0,0,.58), inset 0 0 0 1px rgba(227,164,68,.5);
   pointer-events: none;
 }
-.bio-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.bio-portrait img {
+  position: absolute;
+  inset: 23% 10.5%;
+  display: block;
+  width: 79%;
+  height: 54%;
+  object-fit: cover;
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+}
 .bios h2 { margin: 0 0 14px; font-size: 26px; letter-spacing: -.02em; }
 .bios p { margin: 0; }
 
@@ -633,7 +641,7 @@ nav .share-button:hover, nav .share-button:focus-visible { color: var(--ink); ba
   .story-panel--about .story-content { padding-right: 20px; }
   .story-panel--about .panel-copy { padding-right: 8px; }
   .bio, .bio--reverse { grid-template-columns: 1fr; gap: 14px; padding: 22px 0; }
-  .bio-portrait { width: min(72vw, 250px); aspect-ratio: 1 / 1; }
+  .bio-portrait { width: min(72vw, 250px); aspect-ratio: 4 / 5; }
 }
 
 @media (max-height: 710px) and (min-width: 881px) {
