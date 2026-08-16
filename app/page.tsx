@@ -205,7 +205,7 @@ export default function Home() {
           <button type="button" onClick={() => openPanel("explore")}>EXPLORE</button>
           <button type="button" onClick={() => openPanel("stories")}>STORIES</button>
           <button type="button" onClick={() => openPanel("about")}>ABOUT</button>
-          <button className="share-button" type="button" onClick={() => openPanel("contact")}>CONTRIBUTE</button>
+          <button className="share-button" type="button" onClick={() => openPanel("contact")}>SUBMIT</button>
         </nav>
       </header>
 
