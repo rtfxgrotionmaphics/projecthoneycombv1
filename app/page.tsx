@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import brightLayout from "./honeycomb-bright-layout.json";
 
 type Panel = {
   id: string;
@@ -46,7 +47,7 @@ const PANELS: Panel[] = [
   {
     id: "explore",
     eyebrow: "WELCOME TO HONEYCOMB-PHENOMENON",
-    title: "A living archive of the unexplained.",
+    title: "A living archive of the unexplained",
     body: (
       <>
         <h2>Your Experience. Our Collective History.</h2>
@@ -59,8 +60,8 @@ const PANELS: Panel[] = [
   },
   {
     id: "stories",
-    eyebrow: "EVERY EXPERIENCE IS A POINT OF LIGHT.",
-    title: "Your story belongs here.",
+    eyebrow: "EVERY EXPERIENCE IS A POINT OF LIGHT",
+    title: "Your story belongs here",
     body: (
       <>
         <p>Over the past decade, we have been documenting these interactions to build a visual, searchable database. Here, you can safely record your story, archive your encounter, search and view other encounters, and connect with a global community of people with similar yet personal experiences.</p>
@@ -90,8 +91,8 @@ const PANELS: Panel[] = [
   },
   {
     id: "contact",
-    eyebrow: "ADD YOUR VOICE.",
-    title: "Contact Honeycomb.",
+    eyebrow: "ADD YOUR VOICE",
+    title: "Contact Honeycomb",
     body: (
       <>
         <div className="contact-list">
@@ -108,22 +109,14 @@ const PANELS: Panel[] = [
   },
 ];
 
-// Centers of every occupied cell in D.J.'s controlling 3,327 x 4,096 artwork.
-const SOURCE_CELL_CENTERS = [[2039,204],[2455,204],[1184,288],[1600,288],[2655,320],[2243,324],[1396,400],[2039,440],[2451,440],[2863,440],[776,520],[2247,556],[2659,556],[1835,560],[984,636],[1396,636],[2039,672],[2447,672],[2863,672],[1192,752],[1600,752],[1835,788],[2247,788],[2655,788],[984,868],[1396,868],[2039,908],[2451,908],[2863,908],[1640,948],[1192,984],[776,988],[1831,1020],[2243,1020],[2655,1020],[576,1104],[984,1104],[1396,1104],[2039,1136],[2451,1136],[2863,1136],[776,1220],[1188,1220],[1604,1220],[1831,1256],[2243,1256],[2655,1256],[984,1336],[1396,1340],[2039,1372],[2455,1372],[2863,1372],[364,1456],[776,1456],[1600,1456],[2247,1488],[1835,1492],[2655,1492],[576,1568],[984,1572],[1396,1572],[2043,1604],[2451,1604],[780,1688],[1188,1688],[1600,1688],[1835,1720],[2659,1720],[572,1804],[984,1804],[2043,1840],[2859,1840],[368,1920],[780,1920],[1188,1920],[1600,1920],[1835,1956],[2247,1956],[2659,1956],[984,2036],[1396,2036],[568,2040],[2451,2072],[2859,2072],[2043,2076],[1600,2152],[364,2156],[1192,2156],[2243,2192],[2655,2192],[1396,2268],[572,2272],[2451,2304],[2039,2308],[776,2388],[1192,2388],[1600,2388],[1831,2424],[2247,2424],[2659,2424],[576,2504],[984,2504],[1392,2504],[2451,2540],[2863,2540],[364,2620],[1600,2620],[780,2624],[1192,2624],[1835,2656],[2247,2656],[572,2736],[984,2736],[1396,2740],[2043,2772],[2455,2772],[368,2852],[1192,2852],[780,2856],[1600,2856],[1835,2888],[2655,2888],[2247,2892],[576,2972],[984,2972],[1396,2972],[2451,3004],[2039,3008],[364,3088],[776,3088],[1188,3088],[1600,3088],[1835,3124],[2247,3124],[1392,3204],[572,3208],[984,3208],[2043,3240],[1640,3284],[368,3320],[776,3324],[1188,3324],[1835,3356],[2247,3356],[576,3436],[984,3436],[1396,3436],[2451,3472],[368,3556],[780,3556],[1188,3556],[1835,3588],[576,3672],[988,3672],[2043,3708],[1632,3712],[780,3788],[1188,3792]] as const;
+const FIELD_WIDTH = brightLayout.canvasWidth;
+const FIELD_HEIGHT = brightLayout.canvasHeight;
 
-const FIELD_WIDTH = 12220;
-const FIELD_HEIGHT = 4096;
-const FIELD_OFFSET_X = 424;
-const REPEAT_STEP = 2715;
-const REPEAT_Y_NUDGE = 5;
-
-const HOTSPOTS = Array.from({ length: 4 }, (_, repeat) =>
-  SOURCE_CELL_CENTERS.map(([sourceX, sourceY], cell) => ({
-    x: ((FIELD_OFFSET_X + repeat * REPEAT_STEP + sourceX) / FIELD_WIDTH) * 100,
-    y: ((repeat * REPEAT_Y_NUDGE + sourceY) / FIELD_HEIGHT) * 100,
-    key: `${repeat}-${cell}`,
-  })),
-).flat();
+const HOTSPOTS = brightLayout.cells.map((cell) => ({
+  x: (cell.x / FIELD_WIDTH) * 100,
+  y: (cell.y / FIELD_HEIGHT) * 100,
+  key: `${cell.q}-${cell.r}`,
+}));
 
 const PORTRAIT_SOURCES = [
   ["/people/mark.png", "Mark", "50% 43%", 1.04],
@@ -143,21 +136,25 @@ const PORTRAIT_SOURCES = [
   ["/people/unknown-06.png", "Honeycomb community member", "50% 50%", 1.08],
 ] as const;
 
-// Fifteen occupied centers from one uninterrupted section of the approved
-// lattice. Each portrait therefore shares at least one complete cell edge
-// with another portrait and never floats outside the field.
-const PORTRAIT_CENTERS = [[1835,560],[2039,672],[2247,556],[2447,672],[2659,556],[1835,788],[2247,788],[2655,788],[1831,1020],[2039,1136],[2243,1020],[2451,1136],[2655,1020],[2039,1372],[2455,1372]] as const;
+// Select a compact group from the approved 150% lattice so every portrait is
+// seated in a real Bright Cell and shares the corrected field alignment.
+const PORTRAIT_CENTERS = [...brightLayout.cells]
+  .sort((a, b) => {
+    const aDistance = Math.hypot(a.x - FIELD_WIDTH * 0.53, a.y - FIELD_HEIGHT * 0.49);
+    const bDistance = Math.hypot(b.x - FIELD_WIDTH * 0.53, b.y - FIELD_HEIGHT * 0.49);
+    return aDistance - bDistance;
+  })
+  .slice(0, PORTRAIT_SOURCES.length);
 
 const PORTRAITS = PORTRAIT_SOURCES.map(([src, name, position, scale], index) => {
-  const [sourceX, sourceY] = PORTRAIT_CENTERS[index];
-  const repeat = 1;
+  const { x: sourceX, y: sourceY } = PORTRAIT_CENTERS[index];
   return {
     src,
     name,
     position,
     scale,
-    x: ((FIELD_OFFSET_X + repeat * REPEAT_STEP + sourceX) / FIELD_WIDTH) * 100,
-    y: ((repeat * REPEAT_Y_NUDGE + sourceY) / FIELD_HEIGHT) * 100,
+    x: (sourceX / FIELD_WIDTH) * 100,
+    y: (sourceY / FIELD_HEIGHT) * 100,
   };
 });
 
@@ -215,8 +212,8 @@ export default function Home() {
       <section id="archive-field" className="archive-field" aria-label="Interactive Honeycomb archive">
         <div ref={archiveScrollRef} className="archive-scroll" aria-label="Scrollable archive field">
           <div className="cells-stage">
-            <img className="vines-art" src="/hc-connected-vines-alpha.png" alt="" aria-hidden="true" />
-            <img className="cells-art" src="/hc-cells-final-web.webp" alt="An organic field of illuminated honeycomb archive cells" />
+            <img className="cells-art" src="/hc-approved-cells-150-alpha.png" alt="An organic field of aligned illuminated and dormant Honeycomb archive cells" />
+            <img className="vines-art vines-art--foreground" src="/hc-final-fuller-vine-system-review-18.png" alt="" aria-hidden="true" />
             <div className="cell-hotspots" aria-label="Future archive experiences">
               {HOTSPOTS.map((hotspot) => (
                 <button key={hotspot.key} className="cell-hotspot" type="button" style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }} aria-label="Future archive video">
@@ -252,7 +249,7 @@ export default function Home() {
               <h1>{activePanel.title}</h1>
               <div className="panel-copy">{activePanel.body}</div>
             </div>
-            <footer className="story-footer"><img src="/hc-connected-field-watermark-white.svg" alt="" /><div><strong>YOUR EXPERIENCE.</strong><span>OUR COLLECTIVE HISTORY.</span></div><small>HONEYCOMB</small></footer>
+            <footer className="story-footer"><img src="/hc-connected-field-watermark-white.svg" alt="" /><div><strong>YOUR EXPERIENCE</strong><span>OUR COLLECTIVE HISTORY</span></div><small>HONEYCOMB</small></footer>
           </>
         )}
       </aside>
