@@ -29,7 +29,7 @@ test("keeps all named portraits and the confirmed Paul portrait", () => {
     assert.ok(page.includes(name), `Missing portrait: ${name}`);
   }
   assert.ok(page.includes('/people/paul-werenko.png'));
-  assert.equal((page.match(/\[\"\/people\//g) ?? []).length, 15);
+  assert.equal((page.match(/\["\/people\//g) ?? []).length, 15);
 });
 
 test("retains the approved interaction boundaries", () => {

@@ -51,7 +51,7 @@ const PANELS: Panel[] = [
     body: (
       <>
         <h2>Your Experience. Our Collective History.</h2>
-        <p>Honeycomb's mission is to support and empower those who have experienced or witnessed a UFO, UAP, or anything related to the Phenomenon, through the building of community, and the curation of shared experiences.</p>
+        <p>{"Honeycomb's mission is to support and empower those who have experienced or witnessed a UFO, UAP, or anything related to the Phenomenon, through the building of community, and the curation of shared experiences."}</p>
         <p>We have built an ever-evolving platform to share anomalous experiences with others, one that fosters a new understanding that your experience was unique but not isolated. You are not alone.</p>
         <p>For too long stigma and secrecy have caused us to keep these profound encounters to ourselves, often hiding them from even our closest loved ones.</p>
         <p className="declaration">We are here to change that.</p>
@@ -65,7 +65,7 @@ const PANELS: Panel[] = [
     body: (
       <>
         <p>Over the past decade, we have been documenting these interactions to build a visual, searchable database. Here, you can safely record your story, archive your encounter, search and view other encounters, and connect with a global community of people with similar yet personal experiences.</p>
-        <p>This is our path to disclosure. This information belongs to all of us. No one can classify or hide your story—and your experience might just be another key, unlocking humanity's understanding of our place in the universe.</p>
+        <p>{"This is our path to disclosure. This information belongs to all of us. No one can classify or hide your story—and your experience might just be another key, unlocking humanity's understanding of our place in the universe."}</p>
         <h2>Join the Journey</h2>
         <p>We are building this archive with you. One person at a time. One experience at a time.</p>
         <a className="story-action" href="https://www.honeycomb-phenomenon.com/" target="_blank" rel="noreferrer">SHARE YOUR STORY TODAY AT HONEYCOMB-PHENOMENON.COM <span aria-hidden="true">→</span></a>
